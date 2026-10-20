@@ -24,7 +24,11 @@ export const products = [
     [5000,950000],
     [10000,1999000]
   ].map(([amount,price])=>({id:`stars-${amount}`,category:'stars',name:`${amount} Stars`,description:'Telegram Stars',price,badge:amount===100?'Mashhur':'',icon:'star'})),
-  ...[[3,150000],[6,289000],[12,499000]].map(([months,price],i)=>({id:`premium-${months}`,category:'premium',name:`${months} oy`,description:'Telegram Premium',price,badge:i===0?'Mashhur':'',icon:'telegram'})),
+  ...[
+    [3,'3 oylik',165000],
+    [6,'6 oylik',240000],
+    [12,'1 yillik',395000]
+  ].map(([months,name,price],i)=>({id:`premium-${months}`,category:'premium',name,description:'Telegram Premium',price,badge:i===0?'Mashhur':'',icon:'telegram'})),
   ...[[60,13000],[325,62000],[660,125000],[1800,310000],[3850,620000]].map(([amount,price],i)=>({id:`pubg-${amount}`,category:'pubg',name:`${amount} UC`,description:'Global server',price,badge:i===1?'Mashhur':'',icon:'pubg'})),
   {id:'instagram-followers',category:'social',group:'Instagram',name:'Instagram Obunachilar',description:'1000 ta',price:20000,icon:'instagram'},
   {id:'instagram-like',category:'social',group:'Instagram',name:'Instagram Like',description:'1000 ta',price:12000,icon:'instagram'},

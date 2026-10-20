@@ -25,3 +25,16 @@ test('Telegram Stars prices match the full configured tariff list',()=>{
     assert.equal(byId(`stars-${amount}`)?.price,price);
   }
 });
+
+test('Telegram Premium tariffs match the configured prices',()=>{
+  const expected = [
+    ['premium-3','3 oylik',165000],
+    ['premium-6','6 oylik',240000],
+    ['premium-12','1 yillik',395000]
+  ];
+  for(const [id,name,price] of expected){
+    const product = byId(id);
+    assert.equal(product?.name,name);
+    assert.equal(product?.price,price);
+  }
+});
