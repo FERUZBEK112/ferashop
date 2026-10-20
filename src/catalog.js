@@ -9,7 +9,21 @@ export const categories = [
 ];
 
 export const products = [
-  ...[[50,12000],[100,22000],[250,50000],[500,95000],[1000,180000]].map(([amount,price],i)=>({id:`stars-${amount}`,category:'stars',name:`${amount} Stars`,description:'Telegram Stars',price,badge:i===1?'Mashhur':'',icon:'star'})),
+  ...[
+    [50,12000],
+    [100,22000],
+    [150,33000],
+    [200,44000],
+    [250,55000],
+    [300,65000],
+    [500,99000],
+    [750,150000],
+    [1000,220000],
+    [1500,300000],
+    [2500,500000],
+    [5000,950000],
+    [10000,1999000]
+  ].map(([amount,price])=>({id:`stars-${amount}`,category:'stars',name:`${amount} Stars`,description:'Telegram Stars',price,badge:amount===100?'Mashhur':'',icon:'star'})),
   ...[[3,150000],[6,289000],[12,499000]].map(([months,price],i)=>({id:`premium-${months}`,category:'premium',name:`${months} oy`,description:'Telegram Premium',price,badge:i===0?'Mashhur':'',icon:'telegram'})),
   ...[[60,13000],[325,62000],[660,125000],[1800,310000],[3850,620000]].map(([amount,price],i)=>({id:`pubg-${amount}`,category:'pubg',name:`${amount} UC`,description:'Global server',price,badge:i===1?'Mashhur':'',icon:'pubg'})),
   {id:'instagram-followers',category:'social',group:'Instagram',name:'Instagram Obunachilar',description:'1000 ta',price:20000,icon:'instagram'},
