@@ -13,7 +13,7 @@ export const products = [
   ...[[3,150000],[6,289000],[12,499000]].map(([months,price],i)=>({id:`premium-${months}`,category:'premium',name:`${months} oy`,description:'Telegram Premium',price,badge:i===0?'Mashhur':'',icon:'telegram'})),
   ...[[60,13000],[325,62000],[660,125000],[1800,310000],[3850,620000]].map(([amount,price],i)=>({id:`pubg-${amount}`,category:'pubg',name:`${amount} UC`,description:'Global server',price,badge:i===1?'Mashhur':'',icon:'pubg'})),
   {id:'instagram-followers',category:'social',group:'Instagram',name:'Instagram Obunachilar',description:'1000 ta',price:20000,icon:'instagram'},
-  {id:'instagram-like',category:'social',group:'Instagram',name:'Instagram Like',description:'1000 ta',price:12000,icon:'heart'},
+  {id:'instagram-like',category:'social',group:'Instagram',name:'Instagram Like',description:'1000 ta',price:12000,icon:'instagram'},
   {id:'tiktok-followers',category:'social',group:'TikTok',name:'TikTok Obunachilar',description:'1000 ta',price:18000,icon:'tiktok'},
   {id:'tiktok-like',category:'social',group:'TikTok',name:'TikTok Like',description:'1000 ta',price:10000,icon:'tiktok'},
   {id:'youtube-followers',category:'social',group:'YouTube',name:'YouTube Obunachilar',description:'1000 ta',price:25000,icon:'youtube'},
