@@ -9,7 +9,7 @@ const brandIcons={
   nft:'/assets/nft.svg',
   pubg:'https://www.citypng.com/public/uploads/preview/hd-player-unknown-pubg-battlegrounds-mobile-logo-701751694790566xijfg37aos.png?v=2026010616',
   gemini:'https://cdn.simpleicons.org/googlegemini/8E75B2',
-  capcut:'https://cdn.simpleicons.org/capcut/000000',
+  capcut:'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Capcut-icon.svg/512px-Capcut-icon.svg.png',
   instagram:'https://cdn.simpleicons.org/instagram/E4405F',
   tiktok:'https://cdn.simpleicons.org/tiktok/000000',
   youtube:'https://cdn.simpleicons.org/youtube/FF0000'
