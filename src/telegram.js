@@ -5,6 +5,7 @@ const token=process.env.BOT_TOKEN;
 const admins=new Set((process.env.ADMIN_IDS||'').split(',').map(x=>x.trim()).filter(Boolean));
 const api=method=>`https://api.telegram.org/bot${token}/${method}`;
 let offset=0;
+const esc=value=>String(value??'').replace(/[&<>]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[char]));
 
 export function validateInitData(initData){
   if(!token || !initData) return process.env.NODE_ENV!=='production';
@@ -39,7 +40,7 @@ async function handle(message){
     const orders=await getOrders(user.id);
     return sendMessage(chatId,orders.length?orders.slice(0,10).map(o=>`<b>#${o.id}</b> — ${Number(o.total).toLocaleString('uz-UZ')} so‘m — ${o.status}`).join('\n'):'Sizda hali buyurtma yo‘q.');
   }
-  if(text==='/admin' && admins.has(String(user.id))) return sendMessage(chatId,'Admin buyruqlari:\n/stats\n/orders\n/setstatus ID ready');
+  if(text==='/admin' && admins.has(String(user.id))) return sendMessage(chatId,'Admin buyruqlari:\n/stats\n/orders\n/setstatus ID ready\n\nNFT e’lonlari va takliflarini Mini App ichidagi Profil → NFT admin panel orqali boshqaring.',{reply_markup:shop});
   if(text.startsWith('/setstatus') && admins.has(String(user.id))){ const [,id,status]=text.split(/\s+/); const o=await setOrderStatus(id,status); if(o){await sendMessage(o.telegram_id,`📦 Buyurtma <b>#${o.id}</b> holati: <b>${status}</b>`); return sendMessage(chatId,'✅ Yangilandi');} return sendMessage(chatId,'Buyurtma topilmadi'); }
   return sendMessage(chatId,'FERA SHOP’ni ochish uchun quyidagi tugmani bosing.',{reply_markup:shop});
 }
@@ -60,4 +61,16 @@ export async function startBot(){
 export async function notifyAdmins(order){
   const text=`🆕 <b>Yangi buyurtma #${order.id}</b>\n👤 @${order.username||'username_yoq'} (${order.telegram_id})\n💰 ${Number(order.total).toLocaleString('uz-UZ')} so‘m\n💳 ${order.payment_method}\n📦 ${order.items.map(i=>`${i.name} × ${i.qty}`).join(', ')}`;
   await Promise.all([...admins].map(id=>sendMessage(id,text).catch(()=>null)));
+}
+
+export async function notifyNftSubmission(item){
+  const url=process.env.WEBAPP_URL||'http://localhost:3000';
+  const text=`🖼 <b>Yangi NFT sotuv taklifi #${esc(item.id)}</b>\n👤 @${esc(item.username)} (${esc(item.telegram_id)})\n💰 ${Number(item.price).toLocaleString('uz-UZ')} so‘m\n🔗 <a href="${esc(item.nft_url)}">NFT havolasi</a>`;
+  const reply_markup={inline_keyboard:[[{text:'🛠 NFT admin panel',web_app:{url:`${url}#admin-nfts`}}]]};
+  await Promise.all([...admins].map(id=>sendMessage(id,text,{reply_markup,disable_web_page_preview:false}).catch(()=>null)));
+}
+
+export async function notifyNftSubmissionStatus(item){
+  const label=item.status==='bought'?'✅ Admin NFT’ni sotib olishga rozi bo‘ldi':'❌ NFT taklifi rad etildi';
+  await sendMessage(item.telegram_id,`${label}\n\nNFT: <a href="${esc(item.nft_url)}">havolani ochish</a>\nNarx: <b>${Number(item.price).toLocaleString('uz-UZ')} so‘m</b>`).catch(()=>null);
 }

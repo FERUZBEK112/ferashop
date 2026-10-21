@@ -39,8 +39,7 @@ export const products = [
   {id:'gemini-18',category:'gemini',name:'18 oy',description:'Gemini Advanced',price:299000,badge:'Eng yaxshi tanlov',icon:'gemini'},
   {id:'capcut-1',category:'capcut',name:'1 oy',description:'CapCut Pro',price:79000,icon:'capcut'},
   {id:'capcut-3',category:'capcut',name:'3 oy',description:'CapCut Pro',price:179000,badge:'Mashhur',icon:'capcut'},
-  {id:'capcut-12',category:'capcut',name:'12 oy',description:'CapCut Pro',price:499000,icon:'capcut'},
-  {id:'nft-basic',category:'nft',name:'NFT Basic',description:'Raqamli sovg‘a',price:99000,icon:'nft'}
+  {id:'capcut-12',category:'capcut',name:'12 oy',description:'CapCut Pro',price:499000,icon:'capcut'}
 ];
 
 export const byId = id => products.find(p => p.id === id);
